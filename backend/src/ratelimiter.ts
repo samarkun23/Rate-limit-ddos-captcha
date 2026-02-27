@@ -41,6 +41,19 @@ app.post("/reset-password", passwordResetLimiter, (req, res) => {
     if (!email || !otp || !newPassword) {
         return res.status(400).json({ message: "email,otp and new password req" })
     }
+
+    // captcha logic of cloudeflare upar tumhe token bhi receive karna padega
+    // let formData = new FormData();
+    // formData.append('secret', "SECRET_KEY_OF_A_CLOUD_FLARE");
+    // formData.append('response', 'token');
+
+    // const url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+    // const result = await fetch(url,{
+    //     body: formData,
+    //     method: 'POST'
+    // })
+    // this all are the captcha logic
+
     if (otpStore[email] === otp) {
         console.log(`password for ${email} has been reset to : ${newPassword}`);
         delete otpStore[email];
